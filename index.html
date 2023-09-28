@@ -2,13 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bookshelf Apps</title>
   <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap"
-        rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -35,18 +33,24 @@
         <label for="inputBookIsComplete">Selesai dibaca</label>
         <input id="inputBookIsComplete" type="checkbox">
       </div>
-      <button id="bookSubmit" type="submit">Masukkan Buku ke rak <span>Belum selesai dibaca</span></button>
+      <button id="bookSubmit" type="submit"><span>Masukkan buku ke rak</span></button>
     </form>
   </section>
   
-  <section class="search_section">
-    <h2>Cari Buku (Opsional)</h2>
-    <form id="searchBook">
-      <label for="searchBookTitle">Judul</label>
-      <input id="searchBookTitle" type="text">
-      <button id="searchSubmit" type="submit">Cari</button>
-    </form>
-  </section>
+ <section class="search_section">
+  <h2>Cari Buku (Opsional)</h2>
+  <form id="searchBook">
+    <label for="searchBookTitle">Judul</label>
+    <input id="searchBookTitle" type="text">
+    <button id="searchSubmit" type="submit">Cari</button>
+  </form>
+  
+  <!-- Elemen untuk menampilkan hasil pencarian -->
+  <div id="searchBookResult" class="book_list">
+    <!-- Hasil pencarian akan ditampilkan di sini -->
+  </div>
+</section>
+
   
   <section class="book_shelf">
     <h2>Belum selesai dibaca</h2>
@@ -84,6 +88,7 @@
 </main>
 
 <script src="main.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.31/dist/sweetalert2.all.min.js"></script>
 
 </body>
 </html>

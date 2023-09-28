@@ -116,7 +116,7 @@ function addBook() {
     renderBooks("completeBookshelfList");
 
     // Menampilkan pesan peringatan
-    alert("Buku berhasil ditambahkan!");
+    Swal.fire("Berhasil ditambahkan!", "", "success");
   }
 }
 
@@ -137,11 +137,7 @@ function moveBook(bookId, toCompleteShelf) {
     renderBooks("completeBookshelfList");
 
     // Menampilkan pesan peringatan
-    alert(
-      `Buku berhasil dipindahkan ke rak "${
-        toCompleteShelf ? "Selesai dibaca" : "Belum selesai dibaca"
-      }"!`
-    );
+      Swal.fire(`Berhasil dipindahkan ke rak "${toCompleteShelf ? "Selesai dibaca" : "Belum selesai dibaca"}"!`, "", "success");
   }
 }
 
@@ -162,7 +158,7 @@ function deleteBook(bookId) {
     renderBooks("completeBookshelfList");
 
     // Menampilkan pesan peringatan
-    alert("Buku berhasil dihapus!");
+    Swal.fire("Berhasil dihapus!", "", "success");
   }
 }
 
@@ -179,10 +175,54 @@ searchBookForm.addEventListener("submit", (event) => {
   event.preventDefault();
   const searchTitleInput = document.getElementById("searchBookTitle");
   const searchTitle = searchTitleInput.value.toLowerCase();
-    const books = getBooksFromLocalStorage();
-    const filteredBooks = books.filter((book) => book.title.toLowerCase().includes(searchTitle));
-    const bookList = document.getElementById("searchBookResult");
-    bookList.innerHTML = "";
+  
+  // Mendapatkan daftar buku dari localStorage
+  const books = getBooksFromLocalStorage();
+  
+  // Filter buku berdasarkan judul yang sesuai dengan pencarian
+  const filteredBooks = books.filter((book) => book.title.toLowerCase().includes(searchTitle));
+  
+  // Mendapatkan elemen HTML untuk menampilkan hasil pencarian
+  const bookList = document.getElementById("searchBookResult");
+  bookList.innerHTML = "";
+  
+  // Menampilkan buku-buku yang sesuai dengan hasil pencarian
+  for (const book of filteredBooks) {
+    const bookItem = document.createElement("article");
+    bookItem.classList.add("book_item");
+
+    const h3 = document.createElement("h3");
+    h3.textContent = book.title;
+
+    const authorPara = document.createElement("p");
+    authorPara.textContent = `Penulis: ${book.author}`;
+
+    const yearPara = document.createElement("p");
+    yearPara.textContent = `Tahun: ${book.year}`;
+
+    const actionDiv = document.createElement("div");
+    actionDiv.classList.add("action");
+
+    const moveButton = document.createElement("button");
+    moveButton.textContent = book.isComplete ? "Belum selesai di Baca" : "Selesai dibaca";
+    moveButton.classList.add(book.isComplete ? "green" : "red");
+    moveButton.addEventListener("click", () => moveBook(book.id, !book.isComplete));
+
+    const deleteButton = document.createElement("button");
+    deleteButton.textContent = "Hapus buku";
+    deleteButton.classList.add("red");
+    deleteButton.addEventListener("click", () => deleteBook(book.id));
+
+    actionDiv.appendChild(moveButton);
+    actionDiv.appendChild(deleteButton);
+
+    bookItem.appendChild(h3);
+    bookItem.appendChild(authorPara);
+    bookItem.appendChild(yearPara);
+    bookItem.appendChild(actionDiv);
+
+    bookList.appendChild(bookItem);
+  }
 });
 
 // Render daftar buku saat halaman pertama dimuat

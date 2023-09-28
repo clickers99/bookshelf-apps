@@ -126,6 +126,12 @@ main {
     cursor: pointer;
 }
 
+
+.search_section > .book_item > .action > button {
+  margin-right: 10px;
+}
+
+
 .book_shelf {
     margin: 16px 0 0 0;
     border: 1px solid black;
