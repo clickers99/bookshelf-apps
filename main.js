@@ -205,7 +205,7 @@ searchBookForm.addEventListener("submit", (event) => {
 
     const moveButton = document.createElement("button");
     moveButton.textContent = book.isComplete ? "Belum selesai di Baca" : "Selesai dibaca";
-    moveButton.classList.add(book.isComplete ? "green" : "red");
+    moveButton.classList.add("green");
     moveButton.addEventListener("click", () => moveBook(book.id, !book.isComplete));
 
     const deleteButton = document.createElement("button");
